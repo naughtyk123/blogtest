@@ -37,31 +37,22 @@ Route::get('get_search_result', 'FrontController@get_search_result')->name('get_
 
 
 // auth middleware
-Route::get('add-post', 'PostController@index')->name('add-post');
-Route::post('add_post_record', 'PostController@add_post_record')->name('add_post_record');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::post('uploads', 'Tinymce@uploads')->name('uploadstiny');
-Route::post('remove_tiny_image', 'Tinymce@remove_tiny_image')->name('remove_tiny_image');
+    Route::get('add-post', 'PostController@index')->name('add-post');
+    Route::post('add_post_record', 'PostController@add_post_record')->name('add_post_record');
 
-
-Route::post('delete_post', 'PostController@delete_post')->name('delete_post');
-Route::get('edite/{id}', 'PostController@edite')->name('edite');
-Route::post('edite_post_record', 'PostController@edite_post_record')->name('edite_post_record');
-
-Route::get('my-posts', 'PostController@my_posts')->name('my-posts');
+    Route::post('uploads', 'Tinymce@uploads')->name('uploadstiny');
+    Route::post('remove_tiny_image', 'Tinymce@remove_tiny_image')->name('remove_tiny_image');
 
 
+    Route::post('delete_post', 'PostController@delete_post')->name('delete_post');
+    Route::get('edite/{id}', 'PostController@edite')->name('edite');
+    Route::post('edite_post_record', 'PostController@edite_post_record')->name('edite_post_record');
 
-
-
-
+    Route::get('my-posts', 'PostController@my_posts')->name('my-posts');
+});
 // end
 
 
 
-
-Route::group(['middleware' => ['admincheck']], function () {
-
-    Route::get('create_user', 'Users@index')->name('create_user');
-    Route::post('add_user', 'Users@add_user')->name('add_user');
-});

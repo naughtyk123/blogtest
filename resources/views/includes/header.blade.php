@@ -30,7 +30,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Logout</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('my-posts')}}">
                             @inject('central', 'App\CentralLogics\Uservalidation')
-                            {!!$central->user_icon(Auth::user()->id)!!}</a></li>
+                            {!!$central->user_icon(Auth::user()->id)!!}
+                        </a></li>
 
                     @else
                     <li class="nav-item"><a class="nav-link {{ (Request::is('register') ? 'active' : '') }}" href="{{url('register')}}">Register</a></li>

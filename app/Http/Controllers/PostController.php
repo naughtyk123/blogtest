@@ -52,7 +52,7 @@ class PostController extends Controller
             ]);
         }
 
-       
+
 
 
         $result = Post::create([
@@ -77,7 +77,7 @@ class PostController extends Controller
                 'post_id' => $result->id,
             ]);
         }
-      
+
 
         if ($result) {
             return response()->json([
@@ -137,15 +137,17 @@ class PostController extends Controller
     public function edite(Request $request)
     {
         $cats = Category::get();
-        $post = Post::where('id','=',$request->id)->first();
+        $post = Post::where('id', '=', $request->id)->where('user_id', '=', Auth::user()->id)->first();
         $sit_data = [
             'title' => 'Edite Post',
             'post' => $post,
-            'cats'=>$cats
+            'cats' => $cats
         ];
-
-        return view('frontend.edite_post', $sit_data);
-
+        if ($post) {
+            return view('frontend.edite_post', $sit_data);
+        } else {
+            return redirect('/');
+        }
     }
 
     public function edite_post_record(Request $request)
@@ -172,10 +174,10 @@ class PostController extends Controller
             ]);
         }
 
-       
 
 
-        $result = Post::where('id','=',$request->id)->where('user_id','=',Auth::user()->id)->update([
+
+        $result = Post::where('id', '=', $request->id)->where('user_id', '=', Auth::user()->id)->update([
             'title' => $request->title,
             'post' => $request->post_text,
             'user_id' => Auth::user()->id,
@@ -223,12 +225,13 @@ class PostController extends Controller
     }
 
 
-    public function my_posts(){
+    public function my_posts()
+    {
         $posts = Post::latest()->paginate(6);
         $sit_data = [
             'title' => 'My Posts',
             'posts' => $posts,
-          
+
         ];
 
         return view('frontend.my_posts', $sit_data);
