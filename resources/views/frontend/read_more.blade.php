@@ -1,6 +1,10 @@
 @extends('includes.default')
 @section('content')
-
+<style>
+    .relatediv .col-md-6{
+        width:100%!important;
+    }
+</style>
 <div class="row">
 
     <div class="col-md-8">
@@ -29,7 +33,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4 relatediv">
         <h1>Related</h1>
     
        
