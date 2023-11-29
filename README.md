@@ -3,6 +3,7 @@
 <ul>
     <li>
         first remove .example from .env.example
+        and change db name and pass word to your preference
     </li>
     <li>
         then run a composer install 
